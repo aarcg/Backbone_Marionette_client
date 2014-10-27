@@ -1,5 +1,5 @@
 /*
-** App bootstrapper
+** App Core
 */
 
 require('./vendor_shim');
@@ -45,5 +45,5 @@ App.prototype.start = function() {
 	});
 
 	App.core.start();
-	
+
 };
