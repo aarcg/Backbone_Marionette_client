@@ -1,7 +1,7 @@
 {
-  "name": "Backbone.Marionette Client Boilerplate",
+  "name": "Backbonette_Client",
   "description": "Boilerplate code for Backbone.Marionette clients",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "author": "Aaron Graham",
   "private": true,
   "devDependencies": {
