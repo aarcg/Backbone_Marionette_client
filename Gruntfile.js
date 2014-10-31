@@ -5,14 +5,16 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    config: grunt.file.readJSON('grunt.config.json'),
+
     clean: {
-      build: ['./build']
+      build: ['<%= config.buildDir %>']
     },
 
     browserify: {
       app: {
         src: ['client/js/main.js'],
-        dest: 'build/js/main.js'
+        dest: '<%= config.buildDir %>/js/main.js'
       }
     },
 
@@ -34,7 +36,7 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {
-          './build/css/main.css': './client/css/main.scss'
+          '<%= config.buildDir %>/css/main.css': './client/css/main.scss'
         }
       },
       dist: {
@@ -42,7 +44,7 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          './build/css/main.css': './client/css/main.scss'
+          '<%= config.buildDir %>/css/main.css': './client/css/main.scss'
         }
       }
     },
@@ -52,12 +54,12 @@ module.exports = function(grunt) {
 
     copy: {
       css: {
-        src: './build/css/main.css',
-        dest: './public/css/main.css'
+        src: '<%= config.buildDir %>/css/main.css',
+        dest: '<%= config.publicDir %>/css/main.css'
       },
       js: {
-        src: './build/js/main.js',
-        dest: './public/js/main.js'
+        src: '<%= config.buildDir %>/js/main.js',
+        dest: '<%= config.publicDir %>/js/main.js'
       }
     },
 
@@ -68,7 +70,7 @@ module.exports = function(grunt) {
         },
         files: [{
           src: './build/js/main.js',
-          dest: './public/js/main.js'
+          dest: '<%= config.publicDir %>/js/main.js'
         }]
       }
     },
