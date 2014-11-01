@@ -3,6 +3,7 @@ module.exports = DropableCollectionView = Backbone.Marionette.CollectionView.ext
   idNoConflict: false,
 
   dragEvents: {
+    'dragenter': 'dragenter',
   	'dragover': 'dragover',
   	'drop': 'drop'
   },
@@ -12,27 +13,17 @@ module.exports = DropableCollectionView = Backbone.Marionette.CollectionView.ext
     Marionette.View.prototype.delegateEvents.call(this, ev);
   },
 
+  dragenter: function dragenter(ev) {
+    ev.preventDefault();
+    App.dragdropController.trigger('dragdrop:addCollection', this.collection);
+  },
+
   dragover: function dragover(ev) {
   	ev.preventDefault();
   },
 
   drop: function drop(ev) {
-    ev.preventDefault();
-
-    //is this a jquery event?
-    if(ev.originalEvent) {
-      ev = ev.originalEvent;
-    }
-
-    var data = ev.dataTransfer.getData("text/plain"),
-        jsonData = JSON.parse(data);
-
-    if(this.idNoConflict === true) {
-      jsonData.id = _.uniqueId();
-    }
-    
-    this.collection.add(jsonData, {at: 0});
-
+    App.dragdropController.trigger('dragdrop:drop');
 	}
 
 });
